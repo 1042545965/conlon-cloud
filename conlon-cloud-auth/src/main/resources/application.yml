@@ -1,0 +1,58 @@
+server:
+  port: 9300
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/conlon_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #初始化连接池
+      initial-size: 5
+      #连接池最小
+      min-idle: 5
+      #最大
+      max-active: 30
+      #检测关闭空闲连接 单位 hs
+      time-between-eviction-runs-millis: 60000
+      #去掉后 . 监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall
+
+  application:
+    # 应用程序名称，后面会在消费者中用到
+    name: cloud-auth
+
+# 注册到eureka
+eureka:
+  instance:
+    # 可以使用ip注册
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      ## 注册到 eureka (这里需要自己配置host 和 nginx)
+      defaultZone: http://conlon-eureka/eureka
+
+# mybatis-plus 配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: conlon.cloud.auth.entity
+  global-config:
+    db-config:
+      id-type: auto
+# Logger Config
+# (这里需要在 logback-auth.xml 使用 yml 的参数 所以不能叫做 logback.xml 应为会在 yml之前加载)
+logging:
+  config: classpath:logback-auth.xml
+  level:
+    conlon.cloud.common.dao : debug
+    conlon.cloud.auth.dao : debug
+
+
+# 定义日志级别  debug , info
+logback:
+#  使用 pom当中的参数
+  name: @build.finalName@
+  path: /home/cloud/@build.finalName@/
+  level: info

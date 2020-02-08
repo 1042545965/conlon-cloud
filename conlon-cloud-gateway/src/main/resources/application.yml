@@ -1,0 +1,68 @@
+server:
+  port: 9500
+
+#zuul:
+#  # 设置全局访问的前缀，配置之后所有请求前缀需要加上/api
+#  prefix: /api
+#  host:
+#    # 最大连接数，默认为200
+#    max-total-connections: 200
+#    # 单个路由可以使用的最大连接数，默认为20
+#    max-per-route-connections: 20
+#    # http client中从connection pool中获得一个connection的超时时间，默认为-1，不超时
+#    connection-request-timeout-millis: -1
+#    # 连接建立的超时时间；，默认为2000ms
+#    connect-timeout-millis: 2000
+#    # 响应超时时间，默认为10000ms
+#    socket-timeout-millis: 10000
+#  # 路由规则
+#  routes:
+#    # 用户自定义一个名称，内部是一个Map<String, ZuulRoute>
+#    user-server:
+#      # 需要拦截后转发请求的地址，支持通配符匹配，不配置默认为/user-server/**
+#      path: /auth/**
+#      # spring cloud服务id，不配默认为上面自定义的名称
+#      serverId: cloud-auth
+#      # 是否支持上面的prefix，默认为true，设为false访问该服务前缀不需要/api
+#      stripPrefix: true
+#      # 是否启用自定义配置，默认为false,初始化时会根据sensitive-headers的长度来判断，长度大于0则为true
+#      custom-sensitive-headers: false
+#      ribbon:
+
+zuul:
+  prefix: /api
+  routes:
+    cloud-auth:
+      path: /cloudAuth/**
+      # 就是 服务的名称 application:name = cloud-auth
+      serviceId: cloud-auth
+    cloud-user:
+      path: /cloudUser/**
+      # 就是 服务的名称 application:name = cloud-user
+      serviceId: cloud-user
+
+spring:
+  application:
+    # 应用程序名称，后面会在消费者中用到
+    name: cloud-gateway
+
+# 注册到eureka
+eureka:
+  instance:
+    # 可以使用ip注册
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      ## 注册到 eureka (这里需要自己配置host 和 nginx)
+      defaultZone: http://conlon-eureka/eureka
+
+# 定义日志级别  debug , info
+logback:
+#  使用 pom当中的参数
+  name: @build.finalName@
+  path: /home/cloud/@build.finalName@/
+  level: debug
+
+# 配置日志
+logging:
+  config: classpath:logback-gateway.xml

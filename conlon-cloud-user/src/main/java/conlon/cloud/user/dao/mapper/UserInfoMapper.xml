@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="conlon.cloud.user.dao.UserInfoDao">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="conlon.cloud.user.entity.UserInfo">
+                    <id column="id" property="id" />
+                    <result column="user_name" property="userName" />
+                    <result column="user_code" property="userCode" />
+                    <result column="nick_name" property="nickName" />
+                    <result column="password" property="password" />
+                    <result column="created_time" property="createdTime" />
+                    <result column="created_user_id" property="createdUserId" />
+                    <result column="created_user_name" property="createdUserName" />
+                    <result column="modified_time" property="modifiedTime" />
+                    <result column="modified_user_id" property="modifiedUserId" />
+                    <result column="modified_user_name" property="modifiedUserName" />
+                    <result column="is_deleted" property="isDeleted" />
+                    <result column="status" property="status" />
+                    <result column="remarks" property="remarks" />
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+                id, user_name, user_code, nick_name, password, created_time, created_user_id, created_user_name, modified_time, modified_user_id, modified_user_name, is_deleted, status, remarks
+    </sql>
+
+</mapper>

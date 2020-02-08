@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="conlon.cloud.auth.dao.SysUserMenuDao">
+
+
+
+    <select id="getSysUserMenuList" resultType="conlon.cloud.api.dto.UserMenuDto">
+        SELECT
+            b.*
+        FROM
+            `sys_user` a
+        LEFT JOIN sys_user_menu b ON a.id = b.user_id
+        WHERE
+            a.user_name = #{userName}
+    </select>
+</mapper>
