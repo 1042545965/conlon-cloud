@@ -99,7 +99,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             //设置编码，否则中文字符在重定向时会变为空字符串
             message = URLEncoder.encode(message, "UTF-8");
-            httpServletResponse.sendRedirect("/auth/unauthorized/" + message);
+            httpServletResponse.sendRedirect("/common/unauthorized/" + message);
         } catch (IOException e) {
             log.error(e.getMessage());
         }

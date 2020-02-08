@@ -42,12 +42,12 @@ public class ShiroConfig {
         factoryBean.setFilters(filterMap);
         factoryBean.setSecurityManager(securityManager);
         // 设置无权限时跳转的 url;
-        factoryBean.setUnauthorizedUrl("/auth/unauthorized/无权限");
+        factoryBean.setUnauthorizedUrl("/common/unauthorized/无权限");
         Map<String, String> filterRuleMap = new HashMap<>();
         // 所有请求通过我们自己的JWT Filter
         filterRuleMap.put("/**", "jwt");
         // 访问 /unauthorized/** 不通过JWTFilter
-        filterRuleMap.put("/auth/unauthorized/**", "anon");
+        filterRuleMap.put("/common/unauthorized/**", "anon");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
     }

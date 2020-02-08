@@ -55,7 +55,7 @@
 
 
     <build>
-        <finalName>cloudZuul</finalName>
+        <finalName>cloudGateway</finalName>
         <plugins>
             <!--构建可执行jar-->
             <plugin>

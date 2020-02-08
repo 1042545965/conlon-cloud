@@ -52,7 +52,7 @@ logback:
   #  使用 pom当中的参数
   name: @build.finalName@
   path: /home/cloud/@build.finalName@/
-  level: debug
+  level: info
 
 # 配置日志
 logging:
