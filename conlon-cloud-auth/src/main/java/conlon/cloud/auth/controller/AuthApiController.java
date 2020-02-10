@@ -39,6 +39,11 @@ public class AuthApiController {
      */
     @GetMapping(value = "/getSysUserMenuList")
     public List<UserMenuDto> getSysUserMenuList(@RequestParam("userName") String userName) {
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return sysUserMenuService.getSysUserMenuList(userName);
     }
 

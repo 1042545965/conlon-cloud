@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author conlonx
+ * Filter 当中的异常无法抛出的问题
+ * @author conlon
  * @since 2019-08-28
  */
 @RestController

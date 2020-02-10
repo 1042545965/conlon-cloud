@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication(scanBasePackages = {"conlon.cloud.auth.*", "conlon.cloud.common.*"})
-@EnableFeignClients(basePackages = "conlon.cloud.api.connect")
+//@SpringBootApplication(scanBasePackages = {"conlon.cloud.auth.*", "conlon.cloud.common.*"})
+@SpringBootApplication(scanBasePackages = "conlon.cloud")
+@EnableFeignClients(basePackages = "conlon.cloud.api.*")
 @MapperScan({"conlon.cloud.auth.dao" , "conlon.cloud.common.dao"})
 public class AuthApplication {
 

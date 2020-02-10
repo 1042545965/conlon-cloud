@@ -40,6 +40,17 @@ zuul:
       path: /cloudUser/**
       # 就是 服务的名称 application:name = cloud-user
       serviceId: cloud-user
+  host:
+    # 设置超时时间  单位 毫秒
+    socket-timeout-millis: 16000
+    connect-timeout-millis: 6000
+# 设置zuul的超时时间 , 需要同时设置 ribbon 的 应为zuul 默认是 由 ribbon 实现的
+# 注意ribbon的超时时间要小于zuul超时时间 。
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+
 
 spring:
   application:

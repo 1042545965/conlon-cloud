@@ -5,6 +5,14 @@ server:
 feign:
   hystrix:
     enabled: true
+# 设置 feign 的超时时间 超过 5s 进行降级返回
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
 # DataSource Config
 spring:
   datasource:
