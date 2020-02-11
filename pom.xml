@@ -12,7 +12,6 @@
         <module>conlon-cloud-common</module>
         <module>conlon-cloud-user</module>
         <module>conlon-cloud-auth</module>
-        <module>conlon-cloud-test</module>
         <module>conlon-cloud-eureka</module>
         <module>conlon-cloud-gateway</module>
         <module>conlon-cloud-api</module>
