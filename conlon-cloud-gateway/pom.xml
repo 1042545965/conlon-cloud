@@ -22,7 +22,7 @@
         <!--项目核心依赖-->
         <dependency>
             <groupId>com.github.conlon</groupId>
-            <artifactId>conlon-cloud-common</artifactId>
+            <artifactId>conlon-cloud-api</artifactId>
             <version>${project.version}</version>
             <exclusions>
                 <!--mysql 连接-->

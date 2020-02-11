@@ -3,6 +3,7 @@ package conlon.cloud.user.controller;
 
 import conlon.cloud.api.connect.AuthApi;
 import conlon.cloud.api.dto.UserMenuDto;
+import conlon.cloud.api.exception.InternalApiException;
 import conlon.cloud.common.enums.ConstantEnum;
 import conlon.cloud.common.jwt.JWTUtil;
 import conlon.cloud.common.utils.Result;
@@ -55,8 +56,13 @@ public class UserController {
     public Result getSysUserMenuList(HttpServletRequest request) {
         // jwt 获取userName
         String username = JWTUtil.getUsername(request.getHeader(ConstantEnum.HEADER_TOKEN.getCode()));
-        List<UserMenuDto> sysUserMenuList = authApi.getSysUserMenuList(username);
-        return  Result.ok(sysUserMenuList);
+        try {
+            List<UserMenuDto> sysUserMenuList = authApi.getSysUserMenuList(username);
+            return  Result.ok(sysUserMenuList);
+        }catch (InternalApiException e){
+            return  Result.build(e.getResultCode() , e.getResultMsg());
+        }
+
     }
 
 }

@@ -1,5 +1,6 @@
-package conlon.cloud.common.config;
+package conlon.cloud.api.config;
 
+import conlon.cloud.api.exception.InternalApiException;
 import conlon.cloud.common.enums.ResponseCode;
 import conlon.cloud.common.utils.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -25,5 +26,12 @@ public class BaseExceptionHandler {
         return Result.build(ResponseCode.AUTH_PERMISSIONS_ERROR.getResultCode(),
                 ResponseCode.AUTH_PERMISSIONS_ERROR.getResultMsg());
     }
+
+//    @ExceptionHandler(InternalApiException.class)
+//    public Result<String> internalApiException(InternalApiException exception) {
+//        log.info("internalApi==>{}" + exception.getMessage());
+//        return Result.build(exception.getResultCode(),exception.getResultMsg());
+//    }
+
 
 }

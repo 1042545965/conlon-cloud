@@ -3,6 +3,7 @@ package conlon.cloud.api.connect;
 import conlon.cloud.api.constant.Canstant;
 import conlon.cloud.api.dto.UserMenuDto;
 import conlon.cloud.api.hystrix.AuthApiFallback;
+import conlon.cloud.api.exception.InternalApiException;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -27,6 +28,6 @@ public interface AuthApi {
      * 获取用户登陆权限
      */
     @RequestMapping(value = "/authApi/getSysUserMenuList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserMenuDto> getSysUserMenuList(@RequestParam("userName") String userName);
+    public List<UserMenuDto> getSysUserMenuList(@RequestParam("userName") String userName) throws InternalApiException;
 
 }

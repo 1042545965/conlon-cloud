@@ -17,8 +17,9 @@
     <dependencies>
         <!--小辣椒-->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>com.github.conlon</groupId>
+            <artifactId>conlon-cloud-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- feign -->

@@ -1,4 +1,4 @@
-package conlon.cloud.common.exception;
+package conlon.cloud.api.exception;
 
 import lombok.Data;
 

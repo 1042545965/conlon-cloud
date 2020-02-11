@@ -20,6 +20,10 @@ public enum ResponseCode {
      */
     , FAIL("999999", "网络繁忙，请稍后再试!")
 
+    /**
+     * 请求失败
+     */
+    , SERVICE_INVOKING_ERROR("10000", "服务调用异常")
 
     /**
      * 认证失败
