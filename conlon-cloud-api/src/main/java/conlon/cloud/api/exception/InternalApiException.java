@@ -11,7 +11,7 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 */
 
 public class InternalApiException extends HystrixBadRequestException {
-
+    // HystrixBadRequestException 异常 feign 去处理的时候是不会使用熔断的 所以需要继承这个类
     private static final long serialVersionUID = -1549118434059351846L;
 
     private String resultCode;
