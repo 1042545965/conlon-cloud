@@ -33,6 +33,7 @@ public class InternalApiErrorDecoder implements ErrorDecoder {
         // 对于服务间调用的 非  InternalApiException 异常 ,
         // 还是需要使用降级的方式 , 那么抛出 Exception 异常 。 则会自动降级
         // , 如果有必要全部捕获 那么 这里可以改为 InternalApiException
+        // return new InternalApiException("000000", msg);
         return new Exception(msg);
     }
 }
