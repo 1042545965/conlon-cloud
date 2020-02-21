@@ -16,4 +16,9 @@ public class Canstant {
 	 *  返回成功
 	 */
 	public static final String CLOUD_AUTH_ERROR_MESSAGE = "权限模块调用失败降级返回";
+
+	/**
+	 *  根据接口名称判断是否返回api异常
+	 */
+	public static final String INTERNAL_API_EXCEPTION = "Api";
 }

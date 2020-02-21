@@ -30,4 +30,11 @@ public interface AuthApi {
     @RequestMapping(value = "/authApi/getSysUserMenuList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserMenuDto> getSysUserMenuList(@RequestParam("userName") String userName) throws InternalApiException;
 
+
+    /**
+     * 获取用户登陆权限
+     */
+    @RequestMapping(value = "/authApi/validateParameter", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void validateParameter(@RequestParam(value = "userName" , required = false) String userName) throws InternalApiException;
+
 }

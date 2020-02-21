@@ -19,6 +19,10 @@ public enum ResponseCode {
      * 请求失败
      */
     , FAIL("999999", "网络繁忙，请稍后再试!")
+    /**
+     * 请求失败
+     */
+    , PARAMETER_FAIL("800000", "参数错误")
 
     /**
      * 请求失败
