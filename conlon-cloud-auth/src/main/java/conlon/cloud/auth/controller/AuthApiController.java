@@ -55,7 +55,7 @@ public class AuthApiController {
      * @create 20202/18 22:48
      */
     @GetMapping(value = "/validateParameter")
-    public void validateParameter(@Length(min = 10) @NotBlank(message = "用户名不能为空") String userName) {
+    public void validateParameter(@Length(min = 10 , message = "用户名大于10") @NotBlank(message = "用户名不能为空") String userName) {
         throw new InternalApiException(ResponseCode.SERVICE_INVOKING_ERROR.getResultCode(),
                 ResponseCode.SERVICE_INVOKING_ERROR.getResultMsg());
     }

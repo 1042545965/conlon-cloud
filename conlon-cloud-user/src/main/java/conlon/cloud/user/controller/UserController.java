@@ -75,7 +75,7 @@ public class UserController {
      */
     @GetMapping(value = "/validateParameter")
     @RequiresPermissions("system:menu:edit")
-    public Result validateParameter(String userName) {
+    public Result validateParameter(@Length(min = 1) @NotBlank(message = "用户名不能为空") String userName) {
 //        userInfoService.validateParameter(userName);
         try {
             authApi.validateParameter(userName);

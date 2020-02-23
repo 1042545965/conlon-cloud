@@ -26,9 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class BaseExceptionHandler {
 
-    @Autowired
-    private LocalMethodValidationInterceptor localMethodValidationInterceptor;
-
     @ExceptionHandler(UnauthenticatedException.class)
     public Result<String> nauthenticatedExceptionHandler(UnauthenticatedException exception) {
         log.info("shiro_exception==>{}" + exception.getMessage());
@@ -40,7 +37,7 @@ public class BaseExceptionHandler {
      * 参数校验的异常
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    public Result<String> constraintViolationException(ConstraintViolationException exception) {
+    public Result<String> constraintViolationException(ConstraintViolationException exception) throws InternalApiException{
         log.info("Constraint==>{}" + exception);
         String rootBeanName ="";
         StringBuilder stringBuilder = new StringBuilder();
@@ -51,13 +48,13 @@ public class BaseExceptionHandler {
             log.info("rootBeanName" + rootBeanName);
 
         }
-        if (!StringUtils.isEmpty(rootBeanName) && rootBeanName.contains(Canstant.INTERNAL_API_EXCEPTION)) {
-//            localMethodValidationInterceptor.sendApiException(stringBuilder.toString());
-            // 抛出参数的api异常
-            log.info("==========================================hahahah ==============================" + stringBuilder.toString());
-            throw new InternalApiException(ResponseCode.PARAMETER_FAIL.getResultCode(),
-                    "555555555555555555555");
-        }
+//        if (!StringUtils.isEmpty(rootBeanName) && rootBeanName.contains(Canstant.INTERNAL_API_EXCEPTION)) {
+////            localMethodValidationInterceptor.sendApiException(stringBuilder.toString());
+//            // 抛出参数的api异常
+//            log.info("==========================================hahahah ==============================" + stringBuilder.toString());
+//            throw new InternalApiException(ResponseCode.PARAMETER_FAIL.getResultCode(),
+//                    "555555555555555555555");
+//        }
         return Result.build(ResponseCode.PARAMETER_FAIL.getResultCode(), stringBuilder.toString());
     }
 
