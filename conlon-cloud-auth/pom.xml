@@ -14,6 +14,7 @@
     <properties>
         <!--指定java版本-->
         <java.version>1.8</java.version>
+        <jib.version>1.7.0</jib.version>
     </properties>
 
     <dependencies>
@@ -41,7 +42,7 @@
     </dependencies>
 
     <build>
-        <finalName>cloudAuth</finalName>
+        <finalName>${project.name}</finalName>
         <plugins>
             <!--构建可执行jar-->
             <plugin>
@@ -58,6 +59,47 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+
+
+            <!-- Jib插件 构建成maven镜像-->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib.version}</version>
+                <configuration>
+                    <!-- 拉取所需的基础镜像 - 这里用于运行springboot项目 -->
+                    <from>
+                        <image>openjdk:alpine</image>
+                    </from>
+                    <!-- 最后生成的镜像配置 -->
+                    <to>
+                        <!-- push到阿里云镜像仓库，如果是其它镜像仓库，将下面地址替换掉即可，ex: `Docker Hub` 的 `docker.io/zhengqing/xxx` -->
+                        <image>registry.cn-hangzhou.aliyuncs.com/sdongp-dkz/${project.name}</image>
+                        <!-- 镜像版本号 -->
+                        <tags>
+                            <tag>${project.version}</tag>
+                        </tags>
+                        <auth>
+                            <username>段康庄</username>
+                            <password>dkz13887548339</password>
+                        </auth>
+                    </to>
+                    <container>
+                        <ports>
+                            <port>9200</port>
+                        </ports>
+                    </container>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
