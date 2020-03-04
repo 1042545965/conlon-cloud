@@ -22,7 +22,7 @@ spring:
 
   application:
     # 应用程序名称，后面会在消费者中用到
-    name: cloud-auth
+    name: @build.finalName@
 
 # 注册到eureka
 eureka:

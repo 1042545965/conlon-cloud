@@ -55,7 +55,7 @@ ribbon:
 spring:
   application:
     # 应用程序名称，后面会在消费者中用到
-    name: cloud-gateway
+    name: @build.finalName@
 
 # 注册到eureka
 eureka:
@@ -65,7 +65,7 @@ eureka:
   client:
     serviceUrl:
       ## 注册到 eureka (这里需要自己配置host 和 nginx)
-      defaultZone: http://conlon-eureka/eureka
+      defaultZone: http://eureka01.ms.svc.cluster.local:8888/eureka/,http://eureka02.ms.svc.cluster.local:8888/eureka/
 
 # 定义日志级别  debug , info
 logback:

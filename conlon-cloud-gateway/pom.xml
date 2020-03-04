@@ -56,7 +56,7 @@
 
 
     <build>
-        <finalName>${project.name}</finalName>
+        <finalName>cloud-gateway</finalName>
         <plugins>
             <!--构建可执行jar-->
             <plugin>
@@ -87,7 +87,7 @@
                     <!-- 最后生成的镜像配置 -->
                     <to>
                         <!-- push到阿里云镜像仓库，如果是其它镜像仓库，将下面地址替换掉即可，ex: `Docker Hub` 的 `docker.io/zhengqing/xxx` -->
-                        <image>registry.cn-hangzhou.aliyuncs.com/sdongp-dkz/${project.name}</image>
+                        <image>registry.cn-hangzhou.aliyuncs.com/sdongp-dkz/${project.build.finalName}</image>
                         <!-- 镜像版本号 -->
                         <tags>
                             <tag>${project.version}</tag>
@@ -99,7 +99,7 @@
                     </to>
                     <container>
                         <ports>
-                            <port>9200</port>
+                            <port>9500</port>
                         </ports>
                     </container>
                 </configuration>
