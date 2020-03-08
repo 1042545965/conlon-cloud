@@ -86,7 +86,7 @@
                     </to>
                     <container>
                         <ports>
-                            <port>9300</port>
+                            <port>8020</port>
                         </ports>
                     </container>
                 </configuration>

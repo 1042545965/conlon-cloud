@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: 8040
 
 spring:
   application:
@@ -18,8 +18,8 @@ eureka:
 # 定义日志级别  debug , info
 logback:
 #  使用 pom当中的参数
-  name: @build.finalName@
-  path: /home/cloud/@build.finalName@/
+  name: ${spring.application.name}
+  path: /home/cloud/${logback.name}/
   level: info
 
 # 配置日志

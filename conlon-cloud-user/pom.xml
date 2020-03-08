@@ -77,7 +77,7 @@
                     </to>
                     <container>
                         <ports>
-                            <port>9200</port>
+                            <port>8010</port>
                         </ports>
                     </container>
                 </configuration>

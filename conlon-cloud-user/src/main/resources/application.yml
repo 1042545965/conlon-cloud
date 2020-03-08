@@ -1,5 +1,5 @@
 server:
-  port: 9200
+  port: 8010
 
 # 申明 服务降级
 feign:
@@ -17,7 +17,7 @@ hystrix:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/conlon_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.137.1:3306/conlon_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -35,7 +35,7 @@ spring:
 
   application:
     # 应用程序名称，后面会在消费者中用到
-    name: cloud-user
+    name: @build.finalName@
 
 # mybatis-plus 配置
 mybatis-plus:
@@ -53,13 +53,13 @@ eureka:
   client:
     serviceUrl:
       ## 注册到 eureka (这里需要自己配置host 和 nginx)
-      defaultZone: http://conlon-eureka/eureka
+      defaultZone: http://eureka01.ms.svc.cluster.local:8888/eureka/,http://eureka02.ms.svc.cluster.local:8888/eureka/
 
 # 定义日志级别  debug , info
 logback:
   #  使用 pom当中的参数
-  name: @build.finalName@
-  path: /home/cloud/@build.finalName@/
+  name: ${spring.application.name}
+  path: /home/cloud/${logback.name}/
   level: info
 
 # 配置日志

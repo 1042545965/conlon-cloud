@@ -87,7 +87,7 @@
                     </to>
                     <container>
                         <ports>
-                            <port>8888</port>
+                            <port>8040</port>
                         </ports>
 
                         <entrypoint>

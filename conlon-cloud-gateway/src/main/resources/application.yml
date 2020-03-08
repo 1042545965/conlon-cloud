@@ -1,5 +1,5 @@
 server:
-  port: 9500
+  port: 8030
 
 #zuul:
 #  # 设置全局访问的前缀，配置之后所有请求前缀需要加上/api
@@ -70,8 +70,8 @@ eureka:
 # 定义日志级别  debug , info
 logback:
 #  使用 pom当中的参数
-  name: @build.finalName@
-  path: /home/cloud/@build.finalName@/
+  name: ${spring.application.name}
+  path: /home/cloud/${logback.name}/
   level: debug
 
 # 配置日志

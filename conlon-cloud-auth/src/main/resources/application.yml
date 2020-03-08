@@ -1,10 +1,10 @@
 server:
-  port: 9300
+  port: 8020
 # DataSource Config
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/conlon_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.137.1:3306/conlon_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -32,7 +32,7 @@ eureka:
   client:
     serviceUrl:
       ## 注册到 eureka (这里需要自己配置host 和 nginx)
-      defaultZone: http://conlon-eureka/eureka
+      defaultZone: http://eureka01.ms.svc.cluster.local:8888/eureka/,http://eureka02.ms.svc.cluster.local:8888/eureka/
 
 # mybatis-plus 配置
 mybatis-plus:
@@ -53,6 +53,6 @@ logging:
 # 定义日志级别  debug , info
 logback:
 #  使用 pom当中的参数
-  name: @build.finalName@
-  path: /home/cloud/@build.finalName@/
+  name: ${spring.application.name}
+  path: /home/cloud/${logback.name}/
   level: info

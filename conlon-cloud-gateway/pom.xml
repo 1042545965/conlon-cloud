@@ -99,7 +99,7 @@
                     </to>
                     <container>
                         <ports>
-                            <port>9500</port>
+                            <port>8030</port>
                         </ports>
                     </container>
                 </configuration>
