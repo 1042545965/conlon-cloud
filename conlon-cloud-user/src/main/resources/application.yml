@@ -53,7 +53,7 @@ eureka:
   client:
     serviceUrl:
       ## 注册到 eureka (这里需要自己配置host 和 nginx)
-      defaultZone: http://eureka01.ms.svc.cluster.local:8888/eureka/,http://eureka02.ms.svc.cluster.local:8888/eureka/
+      defaultZone: http://eureka01.ms.svc.cluster.local:8040/eureka/,http://eureka02.ms.svc.cluster.local:8040/eureka/
 
 # 定义日志级别  debug , info
 logback:
