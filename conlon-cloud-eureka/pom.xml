@@ -62,52 +62,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Jib插件 构建成maven镜像-->
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib.version}</version>
-                <configuration>
-                    <!-- 拉取所需的基础镜像 - 这里用于运行springboot项目 -->
-                    <from>
-                        <image>openjdk:8</image>
-                    </from>
-                    <!-- 最后生成的镜像配置 -->
-                    <to>
-                        <!-- push到阿里云镜像仓库，如果是其它镜像仓库，将下面地址替换掉即可，ex: `Docker Hub` 的 `docker.io/zhengqing/xxx` -->
-                        <image>registry.cn-hangzhou.aliyuncs.com/sdongp-dkz/${project.build.finalName}</image>
-                        <!-- 镜像版本号 -->
-                        <tags>
-                            <tag>${project.version}</tag>
-                        </tags>
-                        <auth>
-                            <username>段康庄</username>
-                            <password>dkz13887548339</password>
-                        </auth>
-                    </to>
-                    <container>
-                        <ports>
-                            <port>8040</port>
-                        </ports>
 
-                        <entrypoint>
-                            <!--携带参数 和 Dockerfile ENTRYPOINT 类似-->
-                            <!--<arg>sh</arg>-->
-                            <!--<arg>-c</arg>-->
-                            <!--<arg>java $JAVA_OPTS  -jar /${project.build.finalName}.jar  $APP_OPTS</arg>-->
-                        </entrypoint>
-                    </container>
-
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
         </plugins>
     </build>
