@@ -1,0 +1,45 @@
+server:
+  port: 8050
+
+
+# 注册到eureka
+eureka:
+  instance:
+    # 可以使用ip注册
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      ## 注册到 eureka (这里需要自己配置host 和 nginx)
+      defaultZone: http://eureka01.ms.svc.cluster.local:8040/eureka/
+
+spring:
+  application:
+    # 应用程序名称，后面会在消费者中用到
+    name: @build.finalName@
+  #yml elasticsearch部分
+  elasticsearch:
+    jest:
+      uris: http://192.168.233.129:9200
+      #读取超时时间  单位 (ms)
+      read-timeout: 5000
+      #连接超时 3000 ms
+      connection-timeout: 3000
+      # 登陆名密码
+      username:
+      password:
+      proxy:
+        host:
+        port:
+      # 感觉这个参数是 ES 事务的意思 ， 但是不确定 ，需要研究
+      multi-threaded: true
+
+# 定义日志级别  debug , info
+logback:
+#  使用 pom当中的参数
+  name: ${spring.application.name}
+  path: /home/cloud/${logback.name}/
+  level: info
+
+# 配置日志
+logging:
+  config: classpath:logback-search.xml

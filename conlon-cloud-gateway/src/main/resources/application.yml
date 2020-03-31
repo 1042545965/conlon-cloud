@@ -72,7 +72,7 @@ logback:
 #  使用 pom当中的参数
   name: ${spring.application.name}
   path: /home/cloud/${logback.name}/
-  level: debug
+  level: info
 
 # 配置日志
 logging:
