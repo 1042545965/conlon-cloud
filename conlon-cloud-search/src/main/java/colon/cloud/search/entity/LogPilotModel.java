@@ -1,13 +1,12 @@
 package colon.cloud.search.entity;
 
-import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- *  log pilot的实体类
+ * log pilot的实体类
  * </p>
  *
  * @author conlon
@@ -16,6 +15,8 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class LogPilotModel implements Serializable {
+
+    private static final long serialVersionUID = -7457251668169899249L;
 
     String message;
 

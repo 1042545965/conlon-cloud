@@ -32,22 +32,6 @@ public class JestServiceImpl implements JestService {
     @Autowired
     private JestClient jestClient;
 
-//    /**
-//     * 获取JestClient对象，配置文件中已经指定
-//     * @return
-//     */
-//    public JestClient getJestClient() {
-//
-//        JestClientFactory factory = new JestClientFactory();
-//        factory.setHttpClientConfig(new HttpClientConfig
-//                               .Builder("http://localhost:9200")
-//                               .gson(new GsonBuilder().setDateFormat("yyyy-MM-dd'T'hh:mm:ss").create())
-//                               .connTimeout(1500)
-//                               .readTimeout(3000)
-//                               .multiThreaded(true)
-//                               .build());
-//        return factory.getObject();
-//    }
 
     /**
      * 创建索引
@@ -108,7 +92,6 @@ public class JestServiceImpl implements JestService {
         SearchResult execute = jestClient.execute(search);
         return execute.getJsonString();
     }
-
 
 
     /**
