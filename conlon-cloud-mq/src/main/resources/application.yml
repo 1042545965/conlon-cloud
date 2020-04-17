@@ -1,0 +1,32 @@
+server:
+  port: 8060
+
+
+rocketmq:
+  accessKey: accessKey
+  secretKey: secretKey
+  groupId: groupId
+  # 选择连接 这里使用的是 高效的 TCP 连接
+  nameSrvAddr: nameSrvAddr
+  # 这个可以随意定义 , * 代表所有 不过需要生产者发送的 tag 需要和 消费者的一致
+  tag: TagA
+  # 在阿里云上新建的 topic 的名称
+  topic: topic_family
+
+
+
+
+spring:
+  application:
+    # 应用程序名称，后面会在消费者中用到
+    name: @build.finalName@
+# 定义日志级别  debug , info
+logback:
+#  使用 pom当中的参数
+  name: ${spring.application.name}
+  path: /home/cloud/${logback.name}/
+  level: info
+
+# 配置日志
+logging:
+  config: classpath:logback-mq.xml
