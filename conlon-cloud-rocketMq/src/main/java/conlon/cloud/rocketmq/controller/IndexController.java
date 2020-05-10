@@ -1,6 +1,7 @@
 package conlon.cloud.rocketmq.controller;
 
 
+import conlon.cloud.rocketmq.producer.DefaultProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexController {
 
     @Autowired
-    private DefaultMQProducer defaultMQProducer;
+    private DefaultProducer defaultProducer;
 
     @PutMapping("/sendMessage/{topic}/{tag}/{message}")
     public void sendMessage(
@@ -35,12 +36,14 @@ public class IndexController {
         try {
             Message msg = new Message(topic, tag, message.getBytes(RemotingHelper.DEFAULT_CHARSET));
             // 发送消息到一个Broker
-            SendResult sendResult = defaultMQProducer.send(msg);
+            SendResult sendResult = defaultProducer.getProducer().send(msg);
             // 通过sendResult返回消息是否成功送达
             System.out.printf("%s%n", sendResult);
         } catch (Exception e) {
             log.info(e.getMessage(), e);
         }
     }
+
+
 
 }
