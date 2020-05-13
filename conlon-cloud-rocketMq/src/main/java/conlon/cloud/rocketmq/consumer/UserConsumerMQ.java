@@ -47,10 +47,8 @@ public class UserConsumerMQ {
         // //注册消费的监听 并在此监听中消费信息，并返回消费的状态信息
         consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
             // msgs中只收集同一个topic，同一个tag，并且key相同的message
-            // 会把不同的消息分别放置到不同的队列中
             try {
                 for (Message msg : msgs) {
-
                     //消费者获取消息 这里只输出 不做后面逻辑处理
                     String body = new String(msg.getBody(), "utf-8");
                     log.info("UserConsumerMQ-获取消息-主题topic为={}, 消费消息为={}", msg.getTopic(), body);

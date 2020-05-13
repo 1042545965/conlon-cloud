@@ -1,15 +1,7 @@
 import conlon.cloud.rocketmq.RocketMqApplication;
 import conlon.cloud.rocketmq.config.RocketMQProperties;
-import conlon.cloud.rocketmq.producer.DefaultProducer;
-import java.io.UnsupportedEncodingException;
+import conlon.cloud.rocketmq.producer.DefaultMqProducer;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.rocketmq.client.exception.MQBrokerException;
-import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.client.producer.DefaultMQProducer;
-import org.apache.rocketmq.client.producer.SendResult;
-import org.apache.rocketmq.common.message.Message;
-import org.apache.rocketmq.remoting.common.RemotingHelper;
-import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class RocketMqTest {
 
     @Autowired
-    private DefaultProducer defaultProducer;
+    private DefaultMqProducer defaultProducer;
     @Autowired
     private RocketMQProperties rocketMQProperties;
     @Value("${rocketmq.namesrvAddr}")

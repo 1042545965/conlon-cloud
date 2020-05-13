@@ -5,9 +5,10 @@ server:
 rocketmq:
   #mq的nameserver地址
   namesrvAddr: 192.168.233.150:9876
-  #分组
+  #普通分组
   groupName: default_producer
-
+  #
+  transactionGroupName: transaction_producer
 
 spring:
   application:

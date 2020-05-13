@@ -1,14 +1,15 @@
 package conlon.cloud.rocketmq.controller;
 
 
-import conlon.cloud.rocketmq.producer.DefaultProducer;
-import java.math.BigDecimal;
+import conlon.cloud.rocketmq.producer.DefaultMqProducer;
+import conlon.cloud.rocketmq.producer.TransactionMqProducer;
 import java.util.List;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.client.producer.TransactionSendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageQueue;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
@@ -29,8 +30,17 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class IndexController {
 
+    /**
+     * 普通消息生产者
+     */
     @Autowired
-    private DefaultProducer defaultProducer;
+    private DefaultMqProducer defaultProducer;
+
+    /**
+     * 普通消息生产者
+     */
+    @Autowired
+    private TransactionMqProducer transactionMqProducer;
 
     /**
      * 普通测试消息
@@ -210,6 +220,34 @@ public class IndexController {
                 defaultProducer.getProducer().sendOneway(msg);
                 // 通过sendResult返回消息是否成功送达
                 log.info("asyncSendMessage ==> {}");
+                // 休眠一秒
+                Thread.sleep(500);
+            }
+        } catch (Exception e) {
+            log.info(e.getMessage(), e);
+        }
+    }
+
+
+    /**
+     * 发送事务消息
+     *
+     * @Author:Mr conlon
+     * @create 202/5/13 10:10
+     */
+    @PutMapping("/transactionMqProducer/{topic}/{tag}/{message}")
+    public void transactionMqProducer(
+            @PathVariable("message") String message,
+            @PathVariable("topic") String topic,
+            @PathVariable("tag") String tag) {
+        try {
+            for (int i = 0; i < 5; i++) {
+                Message msg = new Message(topic, tag, String.valueOf(i).getBytes(RemotingHelper.DEFAULT_CHARSET));
+                // 发送事务消息
+                TransactionSendResult transactionSendResult = transactionMqProducer.getProducer()
+                        .sendMessageInTransaction(msg, null);
+                // 通过sendResult返回消息是否成功送达
+                log.info("transactionSendResult ==> {}" , transactionSendResult);
                 // 休眠一秒
                 Thread.sleep(500);
             }

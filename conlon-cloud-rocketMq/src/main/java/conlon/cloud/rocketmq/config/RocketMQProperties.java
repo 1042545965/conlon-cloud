@@ -23,4 +23,9 @@ public class RocketMQProperties {
      * 组名
      */
     private String groupName = "default";
+
+    /**
+     * 组名
+     */
+    private String transactionGroupName = "transaction";
 }
