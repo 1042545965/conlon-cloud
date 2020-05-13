@@ -9,13 +9,19 @@ public enum MqEnum {
 
     USER_GROUP("userGroup", "用户组"),
 
+    SEQUENCE_GROUP("sequenceGroup", "顺序消息组"),
+
+    SEQUENCE_TOPIC("sequenceTopic", "用户topic"),
+
+    SEQUENCE_TOPIC_TAG_ONE("sequenceTagOne", "顺序topic"),
+
     USER_TOPIC("userTopic", "用户topic"),
 
     USER_TOPIC_TAG_ALL("*", "该topic下的所有的tag都被消费"),
 
     USER_TOPIC_TAG_AUTH("authTag", "用户权限tag"),
 
-    USER_TOPIC_TAG_DEFAULT("defaultTag", "该topic下的所有的tag都被消费"),
+    USER_TOPIC_TAG_DEFAULT("defaultTag", "该topic下默认的tag"),
 
     ;
 
