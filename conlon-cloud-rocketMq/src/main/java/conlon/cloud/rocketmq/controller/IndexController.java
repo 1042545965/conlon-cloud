@@ -129,7 +129,7 @@ public class IndexController {
                 // 通过sendResult返回消息是否成功送达
                 log.info("syncSendMessage ==> {}", sendResult);
                 // 休眠
-//                Thread.sleep(500);
+                Thread.sleep(500);
             }
         } catch (Exception e) {
             log.info(e.getMessage(), e);

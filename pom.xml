@@ -18,6 +18,7 @@
         <module>conlon-cloud-search</module>
         <module>conlon-cloud-mq</module>
         <module>conlon-cloud-rocketMq</module>
+        <module>conlon-cloud-canal</module>
     </modules>
 
     <parent>

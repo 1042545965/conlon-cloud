@@ -51,7 +51,7 @@ public class UserConsumerMQ {
                 for (Message msg : msgs) {
                     //消费者获取消息 这里只输出 不做后面逻辑处理
                     String body = new String(msg.getBody(), "utf-8");
-                    log.info("UserConsumerMQ-获取消息-主题topic为={}, 消费消息为={}", msg.getTopic(), body);
+                    log.info("UserConsumerMQ-获取消息-主题topic为={}, 消费消息为={} , 消息tags为={}", msg.getTopic(), body , msg.getTags());
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
