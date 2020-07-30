@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.233.135:3306/conlon_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/conlon_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -32,7 +32,7 @@ eureka:
   client:
     serviceUrl:
       ## 注册到 eureka (这里需要自己配置host 和 nginx)
-      defaultZone: http://eureka01.ms.svc.cluster.local:8040/eureka/,http://eureka02.ms.svc.cluster.local:8040/eureka/
+      defaultZone: http://localhost:8040/eureka/
 
 # mybatis-plus 配置
 mybatis-plus:

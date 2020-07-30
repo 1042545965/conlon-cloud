@@ -13,4 +13,11 @@ import conlon.cloud.auth.entity.SysMenuRole;
  */
 public interface SysMenuRoleService extends IService<SysMenuRole> {
 
+    /**
+     * @param sysMenuRole 权限model
+     * @Author:Mr conlon
+     * @create 2020/7/0 10:21
+     */
+    public void testEventPay(SysMenuRole sysMenuRole);
+
 }

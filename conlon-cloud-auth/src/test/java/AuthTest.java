@@ -1,6 +1,8 @@
 import conlon.cloud.auth.AuthApplication;
 import conlon.cloud.auth.dao.SysUserDao;
+import conlon.cloud.auth.entity.SysMenuRole;
 import conlon.cloud.auth.entity.SysUser;
+import conlon.cloud.auth.service.SysMenuRoleService;
 import conlon.cloud.auth.service.SysUserService;
 import java.util.List;
 import javax.annotation.Resource;
@@ -19,6 +21,8 @@ public class AuthTest {
     private SysUserService sysUserService;
     @Resource
     private SysUserDao sysUserDao;
+    @Autowired
+    private SysMenuRoleService sysMenuRoleService;
 
     @Test
     public void test01() {
@@ -29,5 +33,16 @@ public class AuthTest {
     @Test
     public void test03() {
         sysUserService.isSave(new SysUser().setPassword("aaaaa"));
+    }
+
+
+    @Test
+    public void test04() {
+        sysMenuRoleService.testEventPay(
+                new SysMenuRole()
+                        .setMenuCode("MenuCode")
+                        .setRoleId(0L)
+                        .setUserId(0L)
+        );
     }
 }
