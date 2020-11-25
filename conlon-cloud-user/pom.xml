@@ -30,6 +30,13 @@
             <artifactId>conlon-cloud-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!--测试 使用作用域为test 不能传递 所以没必要公共的-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 
