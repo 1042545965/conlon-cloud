@@ -24,12 +24,6 @@
             <artifactId>conlon-cloud-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!--服务间调用api-->
-        <dependency>
-            <groupId>com.github.conlon</groupId>
-            <artifactId>conlon-cloud-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <!--测试 使用作用域为test 不能传递 所以没必要公共的-->
         <dependency>
