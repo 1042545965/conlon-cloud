@@ -1,0 +1,26 @@
+server:
+  port: 8070
+
+
+rocketmq:
+  #mq的nameserver地址
+  namesrvAddr: 192.168.233.150:9876
+  #普通分组
+  groupName: default_producer
+  #
+  transactionGroupName: transaction_producer
+
+spring:
+  application:
+    # 应用程序名称，后面会在消费者中用到
+    name: @build.finalName@
+# 定义日志级别  debug , info
+logback:
+#  使用 pom当中的参数
+  name: ${spring.application.name}
+  path: /home/cloud/${logback.name}/
+  level: info
+
+# 配置日志
+logging:
+  config: classpath:logback-rocketmq.xml

@@ -1,12 +1,10 @@
 package conlon.cloud.api.config;
 
-import com.alibaba.fastjson.JSON;
 import conlon.cloud.api.constant.Canstant;
 import conlon.cloud.api.exception.InternalApiException;
 import conlon.cloud.common.enums.ResponseCode;
 import java.lang.reflect.Method;
 import java.util.Set;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import javax.validation.executable.ExecutableValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +24,15 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 
+/**
+ * @Description: 动态处理服务间调用的API异常 。
+ * 将所有后缀带API的实体类抛出的异常作为 InternalApiException 异常抛出
+ * 这样我在服务间调用的时候也能使用jsr 303 校验参数了
+ * @Author:Mr conlon
+ * @return
+ * @create 2020/4/30 17:10
+ */
+
 @Component
 @Aspect
 @Slf4j
@@ -42,7 +49,7 @@ public class LocalMethodValidationInterceptor {
     @Before("Pointcut()")
     public void invoke(JoinPoint joinPoint) {
         String class_name = joinPoint.getTarget().getClass().getName();
-        if (!StringUtils.isEmpty(class_name)&& class_name.contains(Canstant.INTERNAL_API_EXCEPTION)){
+        if (!StringUtils.isEmpty(class_name) && class_name.contains(Canstant.INTERNAL_API_EXCEPTION)) {
 
             //切点对象
             Object target = joinPoint.getTarget();
@@ -71,7 +78,7 @@ public class LocalMethodValidationInterceptor {
             if (!result.isEmpty()) {
                 StringBuilder stringBuilder = new StringBuilder();
                 for (Object o : result) {
-                    ConstraintViolationImpl impl = (ConstraintViolationImpl)o;
+                    ConstraintViolationImpl impl = (ConstraintViolationImpl) o;
                     String messageTemplate = impl.getMessageTemplate();
                     stringBuilder.append(messageTemplate);
                 }

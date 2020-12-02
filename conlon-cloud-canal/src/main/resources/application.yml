@@ -1,0 +1,22 @@
+server:
+  port: 8090
+
+canal:
+  server: 192.168.233.160:11111
+  destination: example
+  timeout: 10
+
+spring:
+  application:
+    # 应用程序名称，后面会在消费者中用到
+    name: @build.finalName@
+
+logback:
+  #  使用 pom当中的参数
+  name: ${spring.application.name}
+  path: /home/cloud/${logback.name}/
+  level: info
+
+# 配置日志
+logging:
+  config: classpath:logback-canal.xml

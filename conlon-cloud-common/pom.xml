@@ -15,11 +15,12 @@
         <!--指定java版本-->
         <java.version>1.8</java.version>
         <mybatis.plus.version>3.3.1.tmp</mybatis.plus.version><!--3.2.0-->
-        <alibaba.druid.version>1.1.13</alibaba.druid.version>
+        <alibaba.druid.version>1.1.21</alibaba.druid.version><!--1.1.13-->
         <fastjson.version>1.2.62</fastjson.version>
         <pagehelper.boot.version>1.2.12</pagehelper.boot.version>
         <springfox.swagger.version>2.9.2</springfox.swagger.version>
         <mybatis.typehandlers.version>1.0.2</mybatis.typehandlers.version>
+        <jackson.datatype.version>2.9.2</jackson.datatype.version>
         <eureka.version>2.0.2.RELEASE</eureka.version>
         <jwt.version>3.4.0</jwt.version>
         <shiro.version>1.4.0</shiro.version>
@@ -64,6 +65,12 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-typehandlers-jsr310</artifactId>
             <version>${mybatis.typehandlers.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.datatype.version}</version>
         </dependency>
 
 

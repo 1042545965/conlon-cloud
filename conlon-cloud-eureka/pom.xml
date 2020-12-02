@@ -62,7 +62,52 @@
                 </configuration>
             </plugin>
 
+            <!-- Jib插件 构建成maven镜像-->
+            <!--<plugin>-->
+                <!--<groupId>com.google.cloud.tools</groupId>-->
+                <!--<artifactId>jib-maven-plugin</artifactId>-->
+                <!--<version>${jib.version}</version>-->
+                <!--<configuration>-->
+                    <!--&lt;!&ndash; 拉取所需的基础镜像 - 这里用于运行springboot项目 &ndash;&gt;-->
+                    <!--<from>-->
+                        <!--<image>openjdk:8</image>-->
+                    <!--</from>-->
+                    <!--&lt;!&ndash; 最后生成的镜像配置 &ndash;&gt;-->
+                    <!--<to>-->
+                        <!--&lt;!&ndash; push到阿里云镜像仓库，如果是其它镜像仓库，将下面地址替换掉即可，ex: `Docker Hub` 的 `docker.io/zhengqing/xxx` &ndash;&gt;-->
+                        <!--<image>registry.cn-hangzhou.aliyuncs.com/sdongp-dkz/${project.build.finalName}</image>-->
+                        <!--&lt;!&ndash; 镜像版本号 &ndash;&gt;-->
+                        <!--<tags>-->
+                            <!--<tag>${project.version}</tag>-->
+                        <!--</tags>-->
+                        <!--<auth>-->
+                            <!--<username>段康庄</username>-->
+                            <!--<password>dkz13887548339</password>-->
+                        <!--</auth>-->
+                    <!--</to>-->
+                    <!--<container>-->
+                        <!--<ports>-->
+                            <!--<port>8040</port>-->
+                        <!--</ports>-->
 
+                        <!--<entrypoint>-->
+                            <!--&lt;!&ndash;携带参数 和 Dockerfile ENTRYPOINT 类似&ndash;&gt;-->
+                            <!--&lt;!&ndash;<arg>sh</arg>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<arg>-c</arg>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<arg>java $JAVA_OPTS  -jar /${project.build.finalName}.jar  $APP_OPTS</arg>&ndash;&gt;-->
+                        <!--</entrypoint>-->
+                    <!--</container>-->
+
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>build</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
         </plugins>
     </build>
