@@ -2,9 +2,13 @@ package conlon.cloud.rocketmq.enums;
 
 /**
  * 应用常量枚举
+ * @author ld
  */
 public enum MqEnum {
 
+    /**
+     * 用户组
+     **/
     DEFAULT_GROUP("defaultGroup", "用户组"),
 
     USER_GROUP("userGroup", "用户组"),
