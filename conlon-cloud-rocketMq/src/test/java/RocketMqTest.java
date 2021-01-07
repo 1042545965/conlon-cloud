@@ -3,11 +3,14 @@ import conlon.cloud.rocketmq.RocketMqApplication;
 import conlon.cloud.rocketmq.entity.DemoMqModel;
 import conlon.cloud.rocketmq.entity.TestMqModel;
 import conlon.cloud.rocketmq.enums.MqEnum;
+import conlon.cloud.rocketmq.service.DemoService;
 import java.math.BigDecimal;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.client.producer.TransactionMQProducer;
+import org.apache.rocketmq.client.producer.TransactionSendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +23,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 public class RocketMqTest {
 
+//    @Autowired
+//    private DefaultMQProducer producer;
+
     @Autowired
-    private DefaultMQProducer producer;
+    private TransactionMQProducer producer;
+
+    @Autowired
+    private DemoService demoService;
 
     @Test
     public void test01() throws Exception {
@@ -49,7 +58,17 @@ public class RocketMqTest {
                 JSON.toJSONString(testMqModel).getBytes());
         SendResult result = producer.send(message);
         System.out.println("发送了消息" + result);
+    }
 
+    @Test
+    public void test03() throws Exception {
+
+        TestMqModel testMqModel = new TestMqModel();
+        testMqModel.setDate(new Date());
+        testMqModel.setDoubleData(2.00);
+        testMqModel.setPrice(BigDecimal.TEN);
+        testMqModel.setString("TestMqModel-Is-Transaction");
+        demoService.transactionSend(testMqModel);
     }
 
 }
