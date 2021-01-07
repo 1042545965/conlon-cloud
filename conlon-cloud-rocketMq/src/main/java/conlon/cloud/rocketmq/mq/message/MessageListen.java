@@ -4,6 +4,7 @@ package conlon.cloud.rocketmq.mq.message;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
@@ -14,6 +15,7 @@ import org.apache.rocketmq.common.message.MessageExt;
  * @Description
  * @Date 2021/1/6 20:02
  **/
+@Slf4j
 public class MessageListen implements MessageListenerConcurrently {
 
     /**
@@ -39,8 +41,7 @@ public class MessageListen implements MessageListenerConcurrently {
             //将String类型的message反序列化成对应的对象。
             obj = messageProcessor.transferMessage(message);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("反序列化失败了");
+            log.info("MessageListen-consumeMessage-Exception : {} " , e);
         }
         //处理消息
         boolean result = messageProcessor.handleMessage(obj);

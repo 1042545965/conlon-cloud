@@ -1,6 +1,7 @@
 import com.alibaba.fastjson.JSON;
 import conlon.cloud.rocketmq.RocketMqApplication;
 import conlon.cloud.rocketmq.entity.DemoMqModel;
+import conlon.cloud.rocketmq.entity.TestMqModel;
 import conlon.cloud.rocketmq.enums.MqEnum;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -35,4 +36,20 @@ public class RocketMqTest {
         System.out.println("发送了消息" + result);
 
     }
+
+
+    @Test
+    public void test02() throws Exception {
+        TestMqModel testMqModel = new TestMqModel();
+        testMqModel.setDate(new Date());
+        testMqModel.setDoubleData(2.00);
+        testMqModel.setPrice(BigDecimal.TEN);
+        testMqModel.setString("TestMqModel");
+        Message message = new Message(MqEnum.DEFAULT_TOPIC.getCode(), "test_tag",
+                JSON.toJSONString(testMqModel).getBytes());
+        SendResult result = producer.send(message);
+        System.out.println("发送了消息" + result);
+
+    }
+
 }
