@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "rocketmq")
 @Data
 @Component
-public class RocketMQProperties {
+public class RocketProperties {
 
     /**
      * 地址

@@ -21,6 +21,8 @@ public enum MqEnum {
 
     USER_TOPIC("userTopic", "用户topic"),
 
+    DEFAULT_TOPIC("defaultTopic", "默认topic"),
+
     USER_TOPIC_TAG_ALL("*", "该topic下的所有的tag都被消费"),
 
     USER_TOPIC_TAG_AUTH("authTag", "用户权限tag"),
