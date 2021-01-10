@@ -26,7 +26,8 @@ public class LocalTransactionListener implements TransactionListener {
      **/
     @Override
     public LocalTransactionState executeLocalTransaction(Message msg, Object arg) {
-        log.info("LocalTransactionListener-LocalTransactionListener-executeLocalTransaction , msg : {} , arg : {}" , msg , arg);
+        log.info("LocalTransactionListener-LocalTransactionListener-executeLocalTransaction , msg : {} , arg : {}", msg,
+                arg);
         int value = transactionIndex.getAndIncrement();
         int status = value % 3;
         localTrans.put(msg.getTransactionId(), status);
@@ -37,7 +38,7 @@ public class LocalTransactionListener implements TransactionListener {
      * @Author conlon
      * @Description 该方法被用于回查
      * @Date 2021/1/7 12:07
-      * @param msg
+     * @param msg 消息内容
      **/
     @Override
     public LocalTransactionState checkLocalTransaction(MessageExt msg) {

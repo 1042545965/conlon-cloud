@@ -1,9 +1,16 @@
 package conlon.cloud.rocketmq.mq.message;
 
 
+import com.alibaba.fastjson.JSON;
+import conlon.cloud.rocketmq.mq.BeansUtils;
+import conlon.cloud.rocketmq.mq.ProxyModel;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -19,7 +26,7 @@ import org.apache.rocketmq.common.message.MessageExt;
 public class MessageListen implements MessageListenerConcurrently {
 
     /**
-      * MessageProcessor接口的实现类放进map集合 key：tag value：MessageProcessor实体类
+     * MessageProcessor接口的实现类放进map集合 key：tag value：MessageProcessor实体类
      **/
     private Map<String, MessageProcessor> handleMap = new HashMap<>();
 
@@ -30,25 +37,44 @@ public class MessageListen implements MessageListenerConcurrently {
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list,
             ConsumeConcurrentlyContext consumeConcurrentlyContext) {
-        MessageExt ext = list.get(0);
-        String message = new String(ext.getBody());
-        //获取到tag
-        String tags = ext.getTags();
-        //根据tag从handleMap里获取到我们的处理类
-        MessageProcessor messageProcessor = handleMap.get(tags);
-        Object obj = null;
         try {
-            //将String类型的message反序列化成对应的对象。
-            obj = messageProcessor.transferMessage(message);
+            MessageExt ext = list.get(0);
+            String message = new String(ext.getBody());
+            ProxyModel proxyModel = JSON.parseObject(message, ProxyModel.class);
+            Object[] args = this.decodeArgs(proxyModel.getArgs());
+            Class[] classes = this.decodeArgsClass(proxyModel.getArgs());
+            Class aClass = Class.forName(proxyModel.getClassName());
+            Map beansOfType = BeansUtils.getBeansOfType(aClass);
+            for (Object obj : beansOfType.values()) {
+                obj.getClass().getDeclaredMethod(proxyModel.getMethodName(), classes).invoke(obj, args);
+            }
         } catch (Exception e) {
-            log.info("MessageListen-consumeMessage-Exception : {} " , e);
-        }
-        //处理消息
-        boolean result = messageProcessor.handleMessage(obj);
-        if (!result) {
-            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+            log.info("MessageListen-consumeMessage-Exception : {} ", e);
+//            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
         }
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+    }
+
+    private Class[] decodeArgsClass(Map<Class<?>, String> map) throws ClassNotFoundException {
+        Class[] classes = new Class[map.size()];
+        int i = 0;
+        for (Class key : map.keySet()) {
+            classes[i] = key;
+            i++;
+        }
+        return classes;
+    }
+
+    private Object[] decodeArgs(Map<Class<?>, String> args) throws ClassNotFoundException {
+        Object[] objects = new Object[args.size()];
+        int i = 0 ;
+        for (Entry<Class<?>, String> entry : args.entrySet()) {
+            Class<?> key = entry.getKey();
+            String value = entry.getValue();
+            objects[i] = JSON.parseObject(value ,key);
+            i++;
+        }
+        return objects;
     }
 }
 

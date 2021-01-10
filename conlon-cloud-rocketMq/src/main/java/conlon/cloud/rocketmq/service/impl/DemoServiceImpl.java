@@ -1,9 +1,10 @@
 package conlon.cloud.rocketmq.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import conlon.cloud.rocketmq.api.DemoMqApi;
+import conlon.cloud.rocketmq.entity.DemoMqModel;
 import conlon.cloud.rocketmq.entity.TestMqModel;
 import conlon.cloud.rocketmq.enums.MqEnum;
-import conlon.cloud.rocketmq.mq.message.LocalTransactionListener;
 import conlon.cloud.rocketmq.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -21,17 +22,28 @@ import org.springframework.transaction.annotation.Transactional;
  **/
 @Service
 @Slf4j
-public class DemoServiceImpl implements DemoService {
+public class DemoServiceImpl implements DemoService , DemoMqApi {
+
+    private final TransactionMQProducer producer;
 
     @Autowired
-    private TransactionMQProducer producer;
+    public DemoServiceImpl(TransactionMQProducer producer) {
+        this.producer = producer;
+    }
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public void transactionSend(TestMqModel testMqModel) throws MQClientException {
         Message message = new Message(MqEnum.DEFAULT_TOPIC.getCode(), "test_tag",
                 JSON.toJSONString(testMqModel).getBytes());
-        TransactionSendResult transactionSendResult = producer.sendMessageInTransaction(message , new LocalTransactionListener());
+        TransactionSendResult transactionSendResult = producer
+                .sendMessageInTransaction(message, null);
         System.out.println("发送了事务消息" + transactionSendResult);
+    }
+
+
+    @Override
+    public void testProxySend(DemoMqModel demoMqModel, Long shopId, String macCode, Integer goodId) {
+        log.info("testProxySend , demoMqModel : {} , shopId : {} , macCode :{} , goodId : {}" , demoMqModel , shopId , macCode , goodId);
     }
 }
