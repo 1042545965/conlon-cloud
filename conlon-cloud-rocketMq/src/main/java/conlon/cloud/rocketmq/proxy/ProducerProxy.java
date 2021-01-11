@@ -43,9 +43,6 @@ public class ProducerProxy implements InvocationHandler {
         Message message = new Message(topic, tags, JSON.toJSONBytes(proxyModel));
         SendResult result = producer.send(message);
         log.info("MessageProxyHandler-invoke-SendResult : {} ", result);
-//        System.out.println(method.getName());
-//        System.out.println(method.getDeclaringClass().getName());
-//        this.buildArgs(method.getParameterTypes() , args);
         return null;
     }
 
