@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>conlon-cloud</artifactId>
+        <groupId>com.github.conlon</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>conlon-cloud-design</artifactId>
+
+    <properties>
+        <!--指定java版本-->
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!--项目核心依赖-->
+        <dependency>
+            <groupId>com.github.conlon</groupId>
+            <artifactId>conlon-cloud-api</artifactId>
+            <exclusions>
+                <!--eureka-->
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--测试 使用作用域为test 不能传递 所以没必要公共的-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <finalName>cloud-mq</finalName>
+        <plugins>
+            <!--构建可执行jar-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!--指定jdk版本-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

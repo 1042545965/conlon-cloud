@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="conlon.cloud.design.dao.PaymentConfigDao">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="conlon.cloud.design.entity.PaymentConfigEntity">
+                    <id column="id" property="id" />
+                    <result column="tenant_id" property="tenantId" />
+                    <result column="link_type" property="linkType" />
+                    <result column="pay_type" property="payType" />
+                    <result column="scope_apply" property="scopeApply" />
+                    <result column="shop_id" property="shopId" />
+                    <result column="project_code" property="projectCode" />
+                    <result column="site_id" property="siteId" />
+                    <result column="type" property="type" />
+                    <result column="third_param" property="thirdParam" />
+                    <result column="created_time" property="createdTime" />
+                    <result column="created_user_id" property="createdUserId" />
+                    <result column="created_user_name" property="createdUserName" />
+                    <result column="modified_time" property="modifiedTime" />
+                    <result column="modified_user_id" property="modifiedUserId" />
+                    <result column="modified_user_name" property="modifiedUserName" />
+                    <result column="is_deleted" property="isDeleted" />
+                    <result column="status" property="status" />
+                    <result column="remarks" property="remarks" />
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+                id, tenant_id, link_type, pay_type, scope_apply, shop_id, project_code, site_id, type, third_param, created_time, created_user_id, created_user_name, modified_time, modified_user_id, modified_user_name, is_deleted, status, remarks
+    </sql>
+
+</mapper>

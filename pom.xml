@@ -19,6 +19,7 @@
         <module>conlon-cloud-mq</module>
         <module>conlon-cloud-rocketMq</module>
         <module>conlon-cloud-canal</module>
+        <module>conlon-cloud-design</module>
     </modules>
 
     <parent>

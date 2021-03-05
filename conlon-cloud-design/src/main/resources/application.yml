@@ -1,0 +1,47 @@
+server:
+  port: 9010
+
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/conlon_cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #初始化连接池
+      initial-size: 5
+      #连接池最小
+      min-idle: 5
+      #最大
+      max-active: 30
+      #检测关闭空闲连接 单位 hs
+      time-between-eviction-runs-millis: 60000
+      #去掉后 . 监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall
+
+  application:
+    # 应用程序名称，后面会在消费者中用到
+    name: @build.finalName@
+
+# mybatis-plus 配置
+mybatis-plus:
+  mapper-locations: conlon/cloud/design/dao/mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+
+# 定义日志级别  debug , info
+logback:
+  #  使用 pom当中的参数
+  name: ${spring.application.name}
+  path: /home/cloud/${logback.name}/
+  level: info
+
+# 配置日志
+logging:
+  config: classpath:logback-design.xml
+  level:
+    conlon.cloud.common.dao : debug
+    conlon.cloud.user.dao : debug
