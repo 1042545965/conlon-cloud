@@ -18,4 +18,5 @@ public class ProxyModel {
     private String methodName;
     private String className;
     private LinkedHashMap<Class<?>, String> args;
+    private Object[] testArgs;
 }

@@ -54,24 +54,18 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <groupId>com.github.thierrysquirrel</groupId>
+            <version>2.2.4-RELEASE</version>
+        </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.apache.rocketmq</groupId>-->
-            <!--<artifactId>rocketmq-client</artifactId>-->
-            <!--<version>4.3.0</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
-
-        <dependency>
-            <groupId>com.aliyun.openservices</groupId>
-            <artifactId>ons-client</artifactId>
-            <version>1.8.0.Final</version>
-        </dependency>
 
     </dependencies>
 

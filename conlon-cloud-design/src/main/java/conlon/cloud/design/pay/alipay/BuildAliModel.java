@@ -5,7 +5,7 @@ import conlon.cloud.design.abs.BuildPay;
 import conlon.cloud.design.constant.DesignConstant;
 import conlon.cloud.design.from.ThirdPaymentFrom;
 import conlon.cloud.design.pay.alipay.model.AliPayParamModel;
-import conlon.cloud.common.utils.Signature;
+import conlon.cloud.common.utils.md5.Signature;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package conlon.cloud.common.utils;
+package conlon.cloud.common.utils.md5;
 
 import java.security.MessageDigest;
 import java.util.Arrays;

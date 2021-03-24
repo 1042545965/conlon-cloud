@@ -6,7 +6,9 @@ import conlon.cloud.rocketmq.entity.TestMqModel;
 import conlon.cloud.rocketmq.enums.MqEnum;
 import conlon.cloud.rocketmq.mq.BeansUtils;
 import conlon.cloud.rocketmq.proxy.ProducerProxy;
+import conlon.cloud.rocketmq.proxy.TestProxy;
 import conlon.cloud.rocketmq.service.DemoService;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
@@ -19,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.ReflectionUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = RocketMqApplication.class)
@@ -33,6 +36,9 @@ public class RocketMqTest {
 
     @Autowired
     private ProducerProxy producerProxy;
+
+    @Autowired
+    private TestProxy testProxy;
 
     @Autowired
     private DemoService demoService;
@@ -83,6 +89,29 @@ public class RocketMqTest {
         String tags = "demo_tag";
         DemoMqApi proxy = producerProxy.getProxy(DemoMqApi.class , topic , tags);
         proxy.testProxySend(buildDemoMqModel() ,shopId , macCode , goodId);
+    }
+
+    @Test
+    public void test05() throws Exception {
+        Long shopId = 1234567890L;
+        String macCode = "NettyClientSelector_1";
+        Integer goodId = 10 ;
+        // TestProxy testProxy = new TestProxy().getProxy()
+        DemoMqApi proxy = testProxy.getProxy(DemoMqApi.class);
+
+
+        proxy.testProxySend(buildDemoMqModel() ,shopId , macCode , goodId);
+    }
+
+    @Test
+    public void test06() throws Exception {
+        System.out.println("Dadasdasdas");
+        Class aClass = Class.forName("conlon.cloud.rocketmq.api.DemoMqApi");
+        Object bean = BeansUtils.getBean(aClass);
+        Method newMethod= ReflectionUtils.findMethod(bean.getClass(),"testProxySend");
+        assert newMethod != null;
+        Object objRe= ReflectionUtils.invokeMethod(newMethod,bean);
+        System.out.println(bean);
     }
 
     private DemoMqModel buildDemoMqModel(){

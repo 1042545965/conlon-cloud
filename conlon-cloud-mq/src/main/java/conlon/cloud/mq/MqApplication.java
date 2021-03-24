@@ -1,5 +1,6 @@
 package conlon.cloud.mq;
 
+import com.github.thierrysquirrel.annotation.EnableRocketMQ;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
         DataSourceAutoConfiguration.class,
         DataSourceTransactionManagerAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class})
+@EnableRocketMQ
 public class MqApplication {
 
     public static void main(String[] args) {
