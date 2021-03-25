@@ -3,9 +3,9 @@ server:
 
 
 thierrysquirrel:
-  access-key: LTAIv5qnbcZaPFXc
-  name-srv-addr: http://MQ_INST_1915403512691337_BbNxQksA.mq-internet-access.mq-internet.aliyuncs.com:80
-  secret-key: puCIqpmHXijZ29WTWoCSAcPjHlzgHD
+  access-key: aaa
+  name-srv-addr: aaa
+  secret-key: aaa
 
 
 
