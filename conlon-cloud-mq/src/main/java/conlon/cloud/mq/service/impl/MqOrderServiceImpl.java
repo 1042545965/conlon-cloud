@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @Date 2021/3/24 10:00
  **/
 @Service("mqOrderService")
-@RocketMessage(groupID = "GID_order")
+@RocketMessage(groupID = "GID-sdongpos-shop")
 public class MqOrderServiceImpl implements MqService {
 
 
