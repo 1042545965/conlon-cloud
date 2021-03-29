@@ -43,6 +43,7 @@ public class MessageListen implements MessageListenerConcurrently {
         try {
             MessageExt ext = list.get(0);
             ProxyModel proxyModel = ProtoBufSerializer.deSerialize(ext.getBody() , ProxyModel.class);
+            log.info("MsgId : {} , proxyModel : {} " , ext.getMsgId() , proxyModel);
             Object object = BeansUtils.getBean(Class.forName(proxyModel.getClassName()));
             Method isMethod = ReflectionUtils.findMethod(object.getClass(), proxyModel.getMethodName(), proxyModel.getParameterTypes());
             assert isMethod != null;

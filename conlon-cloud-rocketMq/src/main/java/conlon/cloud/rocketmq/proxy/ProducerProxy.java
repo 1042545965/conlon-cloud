@@ -47,15 +47,6 @@ public class ProducerProxy implements InvocationHandler {
         return null;
     }
 
-    private LinkedHashMap<Class<?>, String> buildArgs(Object[] args) {
-        LinkedHashMap<Class<?>, String> map = new LinkedHashMap<>();
-        for (int j = 0; j < args.length; j++) {
-            Object object = args[j];
-            map.put(object.getClass(), JSON.toJSONString(object));
-        }
-        return map;
-    }
-
     public <T> T getProxy(Class<T> tClass, String topic, String tags) {
         this.topic = topic;
         this.tags = tags;
