@@ -25,6 +25,8 @@
         <jwt.version>3.4.0</jwt.version>
         <shiro.version>1.4.0</shiro.version>
         <easyexcel.version>2.2.6</easyexcel.version>
+        <protostuff-runtime.version>1.7.2</protostuff-runtime.version>
+        <protostuff-core.version>1.7.2</protostuff-core.version>
     </properties>
 
     <dependencies>
@@ -130,6 +132,17 @@
             <version>${easyexcel.version}</version>
         </dependency>
 
+        <!-- 序列化 -->
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>${protostuff-runtime.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>${protostuff-core.version}</version>
+        </dependency>
 
     </dependencies>
 

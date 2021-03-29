@@ -8,7 +8,11 @@ import conlon.cloud.rocketmq.mq.BeansUtils;
 import conlon.cloud.rocketmq.proxy.ProducerProxy;
 import conlon.cloud.rocketmq.proxy.TestProxy;
 import conlon.cloud.rocketmq.service.DemoService;
+import conlon.cloud.rocketmq.service.impl.DemoServiceImpl;
+import conlon.cloud.rocketmq.service.impl.TestServiceImpl;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
@@ -21,27 +25,17 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.ReflectionUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = RocketMqApplication.class)
 @Slf4j
 public class RocketMqTest {
 
-//    @Autowired
-//    private DefaultMQProducer producer;
-
     @Autowired
     private TransactionMQProducer producer;
 
     @Autowired
     private ProducerProxy producerProxy;
-
-    @Autowired
-    private TestProxy testProxy;
-
-    @Autowired
-    private DemoService demoService;
 
     @Test
     public void test01() throws Exception {
@@ -96,22 +90,10 @@ public class RocketMqTest {
         Long shopId = 1234567890L;
         String macCode = "NettyClientSelector_1";
         Integer goodId = 10 ;
-        // TestProxy testProxy = new TestProxy().getProxy()
-        DemoMqApi proxy = testProxy.getProxy(DemoMqApi.class);
-
-
-        proxy.testProxySend(buildDemoMqModel() ,shopId , macCode , goodId);
-    }
-
-    @Test
-    public void test06() throws Exception {
-        System.out.println("Dadasdasdas");
-        Class aClass = Class.forName("conlon.cloud.rocketmq.api.DemoMqApi");
-        Object bean = BeansUtils.getBean(aClass);
-        Method newMethod= ReflectionUtils.findMethod(bean.getClass(),"testProxySend");
-        assert newMethod != null;
-        Object objRe= ReflectionUtils.invokeMethod(newMethod,bean);
-        System.out.println(bean);
+        DemoServiceImpl demoMqApi = new DemoServiceImpl();
+        InvocationHandler invocationHandler = new TestProxy(demoMqApi);
+        DemoMqApi testProxy =  (DemoMqApi)Proxy.newProxyInstance(invocationHandler.getClass().getClassLoader(), demoMqApi.getClass().getInterfaces(), invocationHandler);
+        testProxy.testProxySend(buildDemoMqModel() ,shopId , macCode , goodId);
     }
 
     private DemoMqModel buildDemoMqModel(){

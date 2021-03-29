@@ -1,5 +1,6 @@
 package conlon.cloud.rocketmq.mq;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import lombok.Data;
@@ -13,10 +14,24 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class ProxyModel {
+public class ProxyModel implements Serializable {
+
+    private static final long serialVersionUID = 3088603852382590901L;
 
     private String methodName;
+
     private String className;
-    private LinkedHashMap<Class<?>, String> args;
-    private Object[] testArgs;
+
+    private Class<?>[] parameterTypes;
+
+    private Object[] args;
+
+//    public Object[] getArgs(){
+//        Object[] isArgs ;
+//        for (Class<?> aClass : parameterTypes) {
+//            for (Object arg : args) {
+//
+//            }
+//        }
+//    }
 }

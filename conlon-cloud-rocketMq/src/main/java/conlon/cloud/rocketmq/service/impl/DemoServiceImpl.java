@@ -24,6 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class DemoServiceImpl implements DemoService , DemoMqApi {
 
+    public DemoServiceImpl() {
+        producer = null;
+    }
+
     private final TransactionMQProducer producer;
 
     @Autowired

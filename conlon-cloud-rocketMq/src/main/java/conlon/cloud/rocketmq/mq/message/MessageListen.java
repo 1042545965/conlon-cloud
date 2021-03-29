@@ -2,8 +2,10 @@ package conlon.cloud.rocketmq.mq.message;
 
 
 import com.alibaba.fastjson.JSON;
+import conlon.cloud.common.utils.serializer.ProtoBufSerializer;
 import conlon.cloud.rocketmq.mq.BeansUtils;
 import conlon.cloud.rocketmq.mq.ProxyModel;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.springframework.util.ReflectionUtils;
 
 /**
  * @Author conlon
@@ -39,42 +42,16 @@ public class MessageListen implements MessageListenerConcurrently {
             ConsumeConcurrentlyContext consumeConcurrentlyContext) {
         try {
             MessageExt ext = list.get(0);
-            String message = new String(ext.getBody());
-            ProxyModel proxyModel = JSON.parseObject(message, ProxyModel.class);
-            Object[] args = this.decodeArgs(proxyModel.getArgs());
-            Class[] classes = this.decodeArgsClass(proxyModel.getArgs());
-            Class aClass = Class.forName(proxyModel.getClassName());
-            Map beansOfType = BeansUtils.getBeansOfType(aClass);
-            for (Object obj : beansOfType.values()) {
-                obj.getClass().getDeclaredMethod(proxyModel.getMethodName(), classes).invoke(obj, args);
-            }
+            ProxyModel proxyModel = ProtoBufSerializer.deSerialize(ext.getBody() , ProxyModel.class);
+            Object object = BeansUtils.getBean(Class.forName(proxyModel.getClassName()));
+            Method isMethod = ReflectionUtils.findMethod(object.getClass(), proxyModel.getMethodName(), proxyModel.getParameterTypes());
+            assert isMethod != null;
+            ReflectionUtils.invokeMethod(isMethod, object, proxyModel.getArgs());
         } catch (Exception e) {
             log.info("MessageListen-consumeMessage-Exception : {} ", e);
-//            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
         }
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-    }
-
-    private Class[] decodeArgsClass(Map<Class<?>, String> map) throws ClassNotFoundException {
-        Class[] classes = new Class[map.size()];
-        int i = 0;
-        for (Class key : map.keySet()) {
-            classes[i] = key;
-            i++;
-        }
-        return classes;
-    }
-
-    private Object[] decodeArgs(Map<Class<?>, String> args) throws ClassNotFoundException {
-        Object[] objects = new Object[args.size()];
-        int i = 0 ;
-        for (Entry<Class<?>, String> entry : args.entrySet()) {
-            Class<?> key = entry.getKey();
-            String value = entry.getValue();
-            objects[i] = JSON.parseObject(value ,key);
-            i++;
-        }
-        return objects;
     }
 }
 

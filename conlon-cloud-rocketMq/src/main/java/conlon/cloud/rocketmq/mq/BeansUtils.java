@@ -34,6 +34,20 @@ public class BeansUtils implements ApplicationContextAware {
         return (T) context.getBean(name);
     }
 
+
+    public static void printAllBeans() {
+        String[] beans = context
+                .getBeanDefinitionNames();
+        for (String beanName : beans) {
+            Class<?> beanType = context
+                    .getType(beanName);
+            System.out.println("BeanName:" + beanName);
+            System.out.println("Bean的类型：" + beanType);
+            System.out.println("Bean所在的包：" + beanType.getPackage());
+            System.out.println("Bean：" +context.getBean(
+                    beanName));
+        }
+    }
     public static ApplicationContext getContext() {
         return context;
     }

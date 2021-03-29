@@ -1,6 +1,7 @@
 package conlon.cloud.rocketmq.proxy;
 
 import com.alibaba.fastjson.JSON;
+import conlon.cloud.common.utils.serializer.ProtoBufSerializer;
 import conlon.cloud.rocketmq.mq.ProxyModel;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -36,11 +37,11 @@ public class ProducerProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         ProxyModel proxyModel = new ProxyModel()
-                .setArgs(this.buildArgs(args))
+                .setParameterTypes(method.getParameterTypes())
                 .setClassName(method.getDeclaringClass().getName())
-                .setMethodName(method.getName());
-
-        Message message = new Message(topic, tags, JSON.toJSONBytes(proxyModel));
+                .setMethodName(method.getName())
+                .setArgs(args);
+        Message message = new Message(topic, tags, ProtoBufSerializer.serialize(proxyModel));
         SendResult result = producer.send(message);
         log.info("MessageProxyHandler-invoke-SendResult : {} ", result);
         return null;
