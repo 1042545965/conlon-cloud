@@ -23,7 +23,7 @@
         <jackson.datatype.version>2.9.2</jackson.datatype.version>
         <eureka.version>2.0.2.RELEASE</eureka.version>
         <jwt.version>3.4.0</jwt.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.7.0</shiro.version>
     </properties>
 
     <dependencies>
